@@ -1,7 +1,10 @@
-export const App = () => {
+function App() {
+
   return (
     <>
-      <h1>Hola mundo</h1>
+      <h1>Hola Mundo</h1>
     </>
-  )
+  );
 }
+
+export default App;
