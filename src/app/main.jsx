@@ -4,8 +4,8 @@ import { ThemeProvider } from "@material-tailwind/react"
 import { BrowserRouter } from "react-router-dom"
 
 import '../styles/index.css'
+import { AuthPage } from '../features/auth/pages/AuthPage.jsx'
 import App from './App.jsx'
-import AuthPage from '../features/auth/pages/AuthPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

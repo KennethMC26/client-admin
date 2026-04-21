@@ -1,4 +1,4 @@
-import imgLogo from "../../../assets/img/kinal_sports.png";
+import imgLogo from "../../../assets/img/kinal_sports.png"
 
 export const Navbar = () => {
     return (
