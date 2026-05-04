@@ -1,9 +1,10 @@
-import { AppRoutes } from "./router/AppRoutes"
-import { Toaster } from "react-hot-toast"
+import { AppRoutes } from "./router/AppRoutes";
+import { Toaster } from "react-hot-toast";
+// 1. ELIMINA la importación de ThemeProvider aquí
 
 function App() {
   return (
-    <>
+    <> {/* Usa un fragmento en lugar de ThemeProvider */}
       <Toaster
         position="top-center"
         toastOptions={{
@@ -20,4 +21,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
