@@ -1,27 +1,28 @@
 import { useState, useEffect } from "react";
 import { useEffect as useToastEffect } from "react";
- 
+
 import { useFieldsStore } from "../../users/store/adminStore";
 import { useUIStore } from "../../auth/store/uiStore";
- 
+
 import { showError } from "../../../shared/utils/toast";
 import { spinner } from "@material-tailwind/react"
 import { FieldModal } from "./FieldModal";
- 
+import { showConfirmToast } from "../../auth/components/ConfirmModal";
+
 export const Fields = () => {
- 
+
     const { fields, loading, error, getFields, deleteField } = useFieldsStore();
     const { openConfirm } = useUIStore();
- 
+
     const [openModal, setOpenModal] = useState(false);
     const [selectedField, setSelectedField] = useState(null);
- 
+
     useEffect(() => { getFields() }, [getFields]);
- 
+
     useToastEffect(() => {
         if (error) showError(error);
     }, [error]);
- 
+
     return (
         <div className="p-4">
             {/* HEADER */}
@@ -34,7 +35,7 @@ export const Fields = () => {
                         Administra las canchas registradas
                     </p>
                 </div>
- 
+
                 <button
                     className="bg-main-blue px-4 py-2 rounded text-white hover:opacity-90 transition"
                     onClick={() => {
@@ -45,7 +46,7 @@ export const Fields = () => {
                     + Agregar Campo
                 </button>
             </div>
- 
+
             {/* GRID RESPONSIVE */}
             <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {fields.map((field) => (
@@ -56,34 +57,34 @@ export const Fields = () => {
                         {/* IMAGEN */}
                         <div className="w-full h-52 bg-gray-100 flex items-center justify-center">
                             <img
-                                src={field.image}
+                                src={`https://res.cloudinary.com/dbvwnsbkr/image/upload/kinalSports/${field.image}`}
                                 alt={field.fieldName}
                                 className="max-h-full max-w-full object-contain rounded-t-xl"
                             />
                         </div>
- 
+
                         {/* CONTENIDO */}
                         <div className="p-5">
                             <h2 className="text-xl font-bold text-main-blue">
                                 {field.fieldName}
                             </h2>
- 
+
                             {/* BADGES */}
                             <div className="flex gap-2 mt-2 flex-wrap">
                                 <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700 font-medium">
                                     {field.capacity.replace("_", " ")}
                                 </span>
- 
+
                                 <span className="px-3 py-1 text-xs rounded-full bg-green-100 text-green-700 font-medium">
                                     Q{field.pricePerHour}/hora
                                 </span>
                             </div>
- 
+
                             {/* INFO */}
                             <p className="text-sm text-gray-400 mt-2 truncate">
                                 ID: {field._id}
                             </p>
- 
+
                             {/* BOTONES */}
                             <div className="flex gap-3 mt-5">
                                 <button
@@ -95,14 +96,17 @@ export const Fields = () => {
                                 >
                                     ✏️ Editar
                                 </button>
- 
+
                                 <button
                                     className="flex-1 py-2 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 transition"
                                     onClick={() =>
-                                        openConfirm({
-                                            title: "Eliminar campo",
+                                        showConfirmToast({
+                                            title: "Eliminar cancha",
                                             message: `¿Eliminar ${field.fieldName}?`,
-                                            onConfirm: () => deleteField(field._id),
+                                            onConfirm: () => {
+                                                console.log("CONFIRM EJECUTADO");
+                                                deleteField(field._id);
+                                            },
                                         })
                                     }
                                 >
@@ -113,7 +117,7 @@ export const Fields = () => {
                     </div>
                 ))}
             </div>
- 
+
             <FieldModal
                 isOpen={openModal}
                 onClose={() => {
@@ -123,8 +127,7 @@ export const Fields = () => {
                 field={selectedField}
             />
         </div >
- 
- 
+
+
     );
 };
- 

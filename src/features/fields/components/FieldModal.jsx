@@ -28,7 +28,7 @@ export const FieldModal = ({ isOpen, onClose, field }) => {
                     pricePerHour: field.pricePerHour,
                     description: field.description,
                 });
-                setPreview(field.image);
+                setPreview(`https://res.cloudinary.com/dbvwnsbkr/image/upload/kinalSports/${field.image}`);
             } else {
                 reset({
                     fieldName: "",
@@ -70,7 +70,7 @@ export const FieldModal = ({ isOpen, onClose, field }) => {
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 px-3 sm:px-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg md:max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
-                
+
                 {/* HEADER */}
                 <div
                     className="p-4 sm:p-5 text-white sticky top-0 z-10"
@@ -86,7 +86,7 @@ export const FieldModal = ({ isOpen, onClose, field }) => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col overflow-hidden">
                     <div className="p-4 sm:p-6 space-y-5 overflow-y-auto">
-                        
+
                         {/* PREVIEW */}
                         <div className="flex justify-center">
                             <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl bg-gray-100 border flex items-center justify-center overflow-hidden shadow-inner">
